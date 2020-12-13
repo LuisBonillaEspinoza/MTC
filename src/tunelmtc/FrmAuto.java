@@ -83,8 +83,10 @@ public class FrmAuto extends javax.swing.JFrame {
                     txtSensor5.setText(String.valueOf(b[4]));
                     txtSensor6.setText(String.valueOf(b[5]));
                     d = d + b[i];
-                    txtPromedio.setText(String.valueOf(d / a));
+                    int prom = d/a;
+
                 }
+                                    txtPromedio.setText(String.valueOf(d/a));
                 clsSensores ve = new clsSensores();
                 ve.setSensores_num_ve11(txtSensor1.getText());
                 ve.setSensores_num_vel2(txtSensor2.getText());
@@ -98,16 +100,16 @@ public class FrmAuto extends javax.swing.JFrame {
                 java.util.Date fecha = new Date();
                 DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 System.out.println(fecha1.format(fecha));
-                if ((d / a) > 30) {
-                    Icon icono;
-                    icono = new ImageIcon(getClass().getResource("/Imagenes/Rojo.png"));
-                    jlabelSemaforo.setIcon(icono);
-                    color = "Rojo";
-                } else {
+                if ((d / a) > 20) {
                     Icon icono;
                     icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
                     jlabelSemaforo.setIcon(icono);
                     color = "Verde";
+                } else {
+                    Icon icono;
+                    icono = new ImageIcon(getClass().getResource("/Imagenes/rojo.png"));
+                    jlabelSemaforo.setIcon(icono);
+                    color = "Rojo";
                 }
                 se.setSemaforos_txt_est(color);
                 se.setSemaforos_txt_origen("Automatico");

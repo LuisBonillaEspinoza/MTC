@@ -72,7 +72,6 @@ public class FrmHistorial extends javax.swing.JFrame {
         }
             }
         });
-        System.out.println(auto.sec);
         time.setInitialDelay(0);
         time.start();
     }
