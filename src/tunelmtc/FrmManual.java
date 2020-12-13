@@ -24,7 +24,7 @@ public final class FrmManual extends javax.swing.JFrame {
     FrmAuto auto1 = new FrmAuto();
     private int sec = auto1.TiemRes;
     private int VelPro1 = 0;
-    
+    private static int suma;
     public FrmManual() {
         initComponents();
         bloqueo();
@@ -42,11 +42,14 @@ public final class FrmManual extends javax.swing.JFrame {
         timer2 = new Timer(1000, accion1);
         CambioImagen = new Timer(20000, cambio);
         random = new Timer(20000, accion2);
+        color = new Timer(20000, rove);
         timer2.setInitialDelay(0);
         CambioImagen.setInitialDelay(sec1);
         random.setInitialDelay(sec1);
+        color.setInitialDelay(sec1);
         timer2.start();
         CambioImagen.start();
+        color.start();
         random.start();
     }
     void bloqueo(){
@@ -54,6 +57,13 @@ public final class FrmManual extends javax.swing.JFrame {
         txtope.setEditable(false);
         VelProm.setEditable(false);
     }
+    public ActionListener rove = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            btnRojo.setEnabled(true);
+            btnVerde.setEnabled(true);
+        }
+    };
     public ActionListener accion2 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -66,17 +76,28 @@ public final class FrmManual extends javax.swing.JFrame {
                 b[i] = c;
             }
             if (a > 0) {
-                int suma = 0;
+                suma = 0;
                 for (int i = 0; i < a; i++) {
                     suma = suma + b[i];
-                    
+                                    System.out.println("Los Valores son : " + b[i]);
                 }
+                System.out.println("La Suma es : "+ suma);
+
+                clsSensores sen = new clsSensores();
+                sen.setSensores_num_ve11(String.valueOf(b[0]));
+                sen.setSensores_num_vel2(String.valueOf(b[1]));
+                sen.setSensores_num_vel3(String.valueOf(b[2]));
+                sen.setSensores_num_vel4(String.valueOf(b[3]));
+                sen.setSensores_num_vel5(String.valueOf(b[4]));
+                sen.setSensores_num_vel6(String.valueOf(b[5]));
+                Sensores se = new Sensores();
+                se.IngresarVelocidades(sen);
                 VelPro1 = suma / a;
             } else {
                 VelPro1 = 0;
             }
             System.out.println(VelPro1);
-            VelProm.setText(String.valueOf(VelPro1));
+            VelProm.setText(String.valueOf(VelPro1));           
         }
     };
     public ActionListener accion1 = new ActionListener() {
@@ -186,9 +207,10 @@ public final class FrmManual extends javax.swing.JFrame {
         icono = new ImageIcon(getClass().getResource("/Imagenes/Rojo.png"));
         jlabelSemaforo.setIcon(icono);
     }
+    Timer color;
     Timer timer2;
     Timer CambioImagen;
-    Timer random;
+    public Timer random;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -514,7 +536,6 @@ public final class FrmManual extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrmMenuUsuario gestion = new FrmMenuUsuario();
         gestion.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnGestionActionPerformed
     
     public static void main(String args[]) {

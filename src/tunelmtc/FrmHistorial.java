@@ -21,13 +21,14 @@ import javax.swing.table.DefaultTableModel;
 public class FrmHistorial extends javax.swing.JFrame {
 
     /** Creates new form FrmHistorial */
+    FrmAuto auto1 = new FrmAuto();
     public FrmHistorial() {
         initComponents();
+        auto1.timer.stop();
         setLocationRelativeTo(null);
         tabla();
     }
     void tabla(){
-        FrmAuto auto = new FrmAuto();
         Timer time = new Timer(20000,new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,24 +52,6 @@ public class FrmHistorial extends javax.swing.JFrame {
         } 
         catch (SQLException z) {
             System.out.println("Error al Mostrar los Datos de la Tabla : " + z.getMessage());
-        }
-        while(auto.sec==0){
-        try {
-            PreparedStatement pst = con.prepareStatement("select * from semaforo");
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                datos[0] = rs.getString("semaforos_txt_est");
-                datos[1] = rs.getString("semaforos_txt_origen");
-                datos[2] = rs.getString("semaforos_date_feho");
-                datos[3] = rs.getString("semaforos_do_velpro");
-                datos[4] = rs.getString("operario_num_id");
-                tablita.addRow(datos);
-            }
-            jTable1.setModel(tablita);
-        } 
-        catch (SQLException z) {
-            System.out.println("Error al Mostrar los Datos de la Tabla : " + z.getMessage());
-        }
         }
             }
         });

@@ -14,9 +14,11 @@ public class FrmMenuUsuario extends javax.swing.JFrame {
     /**
      * Creates new form FrmMenuUsuario
      */
+    FrmAuto au = new FrmAuto();
     public FrmMenuUsuario() {
         initComponents();
         setLocationRelativeTo(null);
+        au.timer.stop();
     }
 
     /**
@@ -141,8 +143,6 @@ public class FrmMenuUsuario extends javax.swing.JFrame {
 
     private void btnAtras1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtras1ActionPerformed
         // TODO add your handling code here:
-        FrmManual manual = new FrmManual();
-        manual.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAtras1ActionPerformed
 
