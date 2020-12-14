@@ -77,11 +77,11 @@ public final class FrmManual extends javax.swing.JFrame {
             }
             if (a > 0) {
                 suma = 0;
-                for (int i = 0; i < a; i++) {
-                    suma = suma + b[i];
-                                    System.out.println("Los Valores son : " + b[i]);
-                }
-                System.out.println("La Suma es : "+ suma);
+//                for (int i = 0; i < a; i++) {
+//                    suma = suma + b[i];
+//                                    System.out.println("Los Valores son : " + b[i]);
+//                }
+//                System.out.println("La Suma es : "+ suma);
 
                 clsSensores sen = new clsSensores();
                 sen.setSensores_num_ve11(String.valueOf(b[0]));
@@ -107,8 +107,14 @@ public final class FrmManual extends javax.swing.JFrame {
             int hour = 0;
             int min = 0;
             a = true;
-            if (sec > 0) {
+            if (sec > -1) {
                 sec--;
+                    if(sec<=10){
+                        jLabel1.setText("Quedan " + sec + " sec");
+                    }
+                    if(sec>11){
+                        jLabel1.setText("");
+                    }
             }
             if (a) {
                 String b = "";
@@ -118,11 +124,12 @@ public final class FrmManual extends javax.swing.JFrame {
                 txtTiempoRest.setText(b);
                 
             }
-            while (sec == 0) {
+            while (sec == -1) {
                 sec = 20;
                 a = true;
-                if (sec > 0) {
+                if (sec > -1) {
                     sec--;
+
                 }
                 if (a) {
                     String b = "";
@@ -229,10 +236,11 @@ public final class FrmManual extends javax.swing.JFrame {
         jCamara1 = new javax.swing.JLabel();
         jCamara2 = new javax.swing.JLabel();
         VelProm = new javax.swing.JTextField();
-        txtTiempoRest = new javax.swing.JTextField();
         btnRojo = new javax.swing.JButton();
         btnVerde = new javax.swing.JButton();
         txtope = new javax.swing.JTextField();
+        txtTiempoRest = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -364,7 +372,7 @@ public final class FrmManual extends javax.swing.JFrame {
                                 .addComponent(txtope, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -375,8 +383,8 @@ public final class FrmManual extends javax.swing.JFrame {
                                         .addComponent(jCamara2))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtTiempoRest, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(184, 184, 184)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel5)))
@@ -399,6 +407,11 @@ public final class FrmManual extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(46, 46, 46))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(300, 300, 300)
+                    .addComponent(txtTiempoRest, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(493, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,18 +443,20 @@ public final class FrmManual extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTiempoRest, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGestion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(455, Short.MAX_VALUE)
+                    .addComponent(txtTiempoRest, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(83, 83, 83)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -498,7 +513,7 @@ public final class FrmManual extends javax.swing.JFrame {
         sema.IngresarSemaforo1(se);
         semaforoRojo();
         btnRojo.setEnabled(false);
-        btnVerde.setEnabled(true);
+        btnVerde.setEnabled(false);
     }//GEN-LAST:event_btnRojoActionPerformed
 
     private void btnVerdeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerdeMouseClicked
@@ -523,7 +538,7 @@ public final class FrmManual extends javax.swing.JFrame {
         sema.IngresarSemaforo1(se);
         semaforoVerde();
         btnVerde.setEnabled(false);
-        btnRojo.setEnabled(true);
+        btnRojo.setEnabled(false);
     }//GEN-LAST:event_btnVerdeActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
@@ -580,6 +595,7 @@ public final class FrmManual extends javax.swing.JFrame {
     static javax.swing.JButton btnVerde;
     public static javax.swing.JLabel jCamara1;
     private static javax.swing.JLabel jCamara2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

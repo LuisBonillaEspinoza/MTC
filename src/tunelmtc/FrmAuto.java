@@ -21,23 +21,26 @@ import java.util.Date;
 import javax.swing.Timer;
 
 public class FrmAuto extends javax.swing.JFrame {
-    
+
     public int time = 20000;
     public int sec = 20;
-    public static int d ;
+    public static int d;
     public int TiemTrans = 0;
     public static int TiemRes;
     public static int VelPro = 0;
-
+    private int mas=0;
+    private int h = 0;
+    private int time1=20000 + mas;
     public FrmAuto() {
         initComponents();
         setLocationRelativeTo(null);
         bloquear();
-        timer = new Timer(20000, repe);
+        timer = new Timer(time1, repe);
         timer1 = new Timer(1000, cont);
         timer.setInitialDelay(0);
-        timer.start();
+        timer.setInitialDelay(0);
         timer1.start();
+        timer.start();
     }
 
     void bloquear() {
@@ -56,23 +59,29 @@ public class FrmAuto extends javax.swing.JFrame {
         icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
         jlabelSemaforo.setIcon(icono);
     }
-    
+
     public void semaforoRojo() {
         Icon icono;
         icono = new ImageIcon(getClass().getResource("/Imagenes/Rojo.png"));
         jlabelSemaforo.setIcon(icono);
     }
-    ActionListener repe = new ActionListener() {
+    private ActionListener repe = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             int a;
             int c;
+            mas = 0;
             int b[] = new int[6];
-            d=0;
+            d = 0;
             String color = "";
             a = (int) (Math.random() * 6);
-            
             System.out.println(a);
+            for (int i = 0; i < h; i++) {
+                mas = mas + 1000;
+                System.out.println(h);
+            }
+            System.out.println(time1);
+            h++;
             for (int i = 0; i < a; i++) {
                 c = (int) (Math.random() * 60);
                 b[i] = c;
@@ -87,7 +96,7 @@ public class FrmAuto extends javax.swing.JFrame {
                     txtSensor6.setText(String.valueOf(b[5]));
                     d = d + b[i];
                 }
-                txtPromedio.setText(String.valueOf(d/a));
+                txtPromedio.setText(String.valueOf(d / a));
                 clsSensores ve = new clsSensores();
                 ve.setSensores_num_ve11(txtSensor1.getText());
                 ve.setSensores_num_vel2(txtSensor2.getText());
@@ -99,7 +108,7 @@ public class FrmAuto extends javax.swing.JFrame {
                 java.util.Date fecha = new Date();
                 DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 ve1.IngresarVelocidades(ve);
-                clsSemaforo se = new clsSemaforo();                
+                clsSemaforo se = new clsSemaforo();
                 if ((d / a) > 20) {
                     Icon icono;
                     icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
@@ -140,7 +149,7 @@ public class FrmAuto extends javax.swing.JFrame {
                 java.util.Date fecha = new Date();
                 DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 ve1.IngresarVelocidades(ve);
-                clsSemaforo se = new clsSemaforo();                
+                clsSemaforo se = new clsSemaforo();
                 System.out.println(fecha1.format(fecha));
                 Icon icono;
                 icono = new ImageIcon(getClass().getResource("/Imagenes/rojo.png"));
@@ -160,6 +169,8 @@ public class FrmAuto extends javax.swing.JFrame {
             } else {
                 VelPro = 0;
             }
+
+            System.out.println(mas);
         }
     };
     public ActionListener cont = new ActionListener() {
@@ -169,7 +180,7 @@ public class FrmAuto extends javax.swing.JFrame {
             int hour = 0;
             int min = 0;
             a = true;
-            if (sec > 0) {
+            if (sec > -1) {
                 sec--;
             }
             if (a) {
@@ -177,14 +188,14 @@ public class FrmAuto extends javax.swing.JFrame {
                 b += (hour > 9) ? ":" + hour : "0" + hour;
                 b += (min > 9) ? ":" + min : ":0" + min;
                 b += (sec > 9) ? ":" + sec : ":0" + sec;
-                
+
                 txtTiempoRest.setText(b);
-                
+
             }
-            while (sec == 0) {
+            while (sec == -1) {
                 sec = 20;
                 a = true;
-                if (sec > 0) {
+                if (sec > -1) {
                     sec--;
                 }
                 if (a) {
@@ -192,14 +203,14 @@ public class FrmAuto extends javax.swing.JFrame {
                     b += (hour > 9) ? ":" + hour : "0" + hour;
                     b += (min > 9) ? ":" + min : ":0" + min;
                     b += (sec > 9) ? ":" + sec : ":0" + sec;
-                    
+
                     txtTiempoRest.setText(b);
-                    
+
                 }
             }
         }
     };
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
