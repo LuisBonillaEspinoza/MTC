@@ -77,11 +77,9 @@ public final class FrmManual extends javax.swing.JFrame {
             }
             if (a > 0) {
                 suma = 0;
-//                for (int i = 0; i < a; i++) {
-//                    suma = suma + b[i];
-//                                    System.out.println("Los Valores son : " + b[i]);
-//                }
-//                System.out.println("La Suma es : "+ suma);
+                for (int i = 0; i < a; i++) {
+                    suma = suma + b[i];
+                }
 
                 clsSensores sen = new clsSensores();
                 sen.setSensores_num_ve11(String.valueOf(b[0]));
