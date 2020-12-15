@@ -4,55 +4,67 @@ import Entidad.clsSemaforo;
 import Entidad.clsSensores;
 import Negocios.Semaforo;
 import Negocios.Sensores;
-import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
-import javax.swing.JOptionPane;
-import static tunelmtc.FrmAuto.VelPro;
+import static tunelmtc.FrmAuto.d;
 import static tunelmtc.FrmAuto.jlabelSemaforo;
 
 public final class FrmManual extends javax.swing.JFrame {
-    
+
     FrmAuto auto1 = new FrmAuto();
     private int sec = auto1.TiemRes;
     private int VelPro1 = 0;
     private static int suma;
+
     public FrmManual() {
         initComponents();
         bloqueo();
-        auto1.timer.stop();
-        setLocationRelativeTo(null);
-        if (auto1.VelPro < 30) {
-            semaforoVerde();
+                auto1.timer.stop();
+        auto1.timer1.stop();
+        if (auto1.VelPro > 20) {
+            Icon icono;
+            icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
+            jlabelSemaforo.setIcon(icono);
         } else {
-            semaforoRojo();
+            Icon icono;
+            icono = new ImageIcon(getClass().getResource("/Imagenes/rojo.png"));
+            jlabelSemaforo.setIcon(icono);
         }
+        setLocationRelativeTo(null);
+
         int sec1 = (sec - 1) * 1000;
         FrmLogin lo = new FrmLogin();
+
         txtope.setText(lo.cod);
         VelProm.setText(String.valueOf(auto1.VelPro));
         timer2 = new Timer(1000, accion1);
         CambioImagen = new Timer(20000, cambio);
         random = new Timer(20000, accion2);
         color = new Timer(20000, rove);
+
+        random.setInitialDelay(sec1);
+        random.start();
         timer2.setInitialDelay(0);
         CambioImagen.setInitialDelay(sec1);
-        random.setInitialDelay(sec1);
+
         color.setInitialDelay(sec1);
         timer2.start();
         CambioImagen.start();
+
         color.start();
-        random.start();
+
     }
-    void bloqueo(){
+
+    void bloqueo() {
         txtTiempoRest.setEditable(false);
         txtope.setEditable(false);
         VelProm.setEditable(false);
@@ -69,6 +81,7 @@ public final class FrmManual extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             int a;
             int c;
+            String color = "";
             int b[] = new int[6];
             a = (int) (Math.random() * 6);
             for (int i = 0; i < a; i++) {
@@ -80,22 +93,42 @@ public final class FrmManual extends javax.swing.JFrame {
                 for (int i = 0; i < a; i++) {
                     suma = suma + b[i];
                 }
-
-                clsSensores sen = new clsSensores();
-                sen.setSensores_num_ve11(String.valueOf(b[0]));
-                sen.setSensores_num_vel2(String.valueOf(b[1]));
-                sen.setSensores_num_vel3(String.valueOf(b[2]));
-                sen.setSensores_num_vel4(String.valueOf(b[3]));
-                sen.setSensores_num_vel5(String.valueOf(b[4]));
-                sen.setSensores_num_vel6(String.valueOf(b[5]));
-                Sensores se = new Sensores();
-                se.IngresarVelocidades(sen);
                 VelPro1 = suma / a;
-            } else {
-                VelPro1 = 0;
+
+                VelProm.setText(String.valueOf(VelPro1));
+//                clsSensores ve = new clsSensores();
+//                ve.setSensores_num_ve11(String.valueOf(b[0]));
+//                ve.setSensores_num_vel2(String.valueOf(b[1]));
+//                ve.setSensores_num_vel3(String.valueOf(b[2]));
+//                ve.setSensores_num_vel4(String.valueOf(b[3]));
+//                ve.setSensores_num_vel5(String.valueOf(b[4]));
+//                ve.setSensores_num_vel6(String.valueOf(b[5]));
+//                Sensores ve1 = new Sensores();
+//                java.util.Date fecha = new Date();
+//                DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                ve1.IngresarVelocidades(ve);
+//                clsSemaforo se = new clsSemaforo();
+//                if (VelPro1 > 20) {
+//                    Icon icono;
+//                    icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
+//                    jlabelSemaforo.setIcon(icono);
+//                    color = "Verde";
+//                } else {
+//                    Icon icono;
+//                    icono = new ImageIcon(getClass().getResource("/Imagenes/rojo.png"));
+//                    jlabelSemaforo.setIcon(icono);
+//                    color = "Rojo";
+//                }
+//                se.setSemaforos_txt_est(color);
+//                se.setSemaforos_txt_origen("Manual");
+//                se.setSemaforos_date_feho(fecha1.format(fecha));
+//                se.setSemaforos_do_velpro(String.valueOf(VelPro1));
+//                Sensores sen = new Sensores();
+//                se.setSensores_num_cod(String.valueOf(sen.ObtenerUltimoId()));
+//                Semaforo sema = new Semaforo();
+//                sema.IngresarSemaforo2(se);} else {
+//                VelPro1 = 0;
             }
-            System.out.println(VelPro1);
-            VelProm.setText(String.valueOf(VelPro1));           
         }
     };
     public ActionListener accion1 = new ActionListener() {
@@ -107,12 +140,12 @@ public final class FrmManual extends javax.swing.JFrame {
             a = true;
             if (sec > -1) {
                 sec--;
-                    if(sec<=10){
-                        jLabel1.setText("Quedan " + sec + " sec");
-                    }
-                    if(sec>11){
-                        jLabel1.setText("");
-                    }
+                if (sec <= 10 && sec >= 0) {
+                    jLabel1.setText("Ejecute el cambio de semáforo ahora");
+                } else {
+                    jLabel1.setText("");
+                }
+
             }
             if (a) {
                 String b = "";
@@ -120,7 +153,7 @@ public final class FrmManual extends javax.swing.JFrame {
                 b += (min > 9) ? ":" + min : ":0" + min;
                 b += (sec > 9) ? ":" + sec : ":0" + sec;
                 txtTiempoRest.setText(b);
-                
+
             }
             while (sec == -1) {
                 sec = 20;
@@ -134,9 +167,9 @@ public final class FrmManual extends javax.swing.JFrame {
                     b += (hour > 9) ? ":" + hour : "0" + hour;
                     b += (min > 9) ? ":" + min : ":0" + min;
                     b += (sec > 9) ? ":" + sec : ":0" + sec;
-                    
+
                     txtTiempoRest.setText(b);
-                    
+
                 }
             }
         }
@@ -153,19 +186,19 @@ public final class FrmManual extends javax.swing.JFrame {
                     iconoCamara1 = new ImageIcon(getClass().getResource("/Cámara/Camara1 - 2.png"));
                     jCamara1.setIcon(iconoCamara1);
                     break;
-                
+
                 case 1:
                     contadorCamara1 = 2;
                     iconoCamara1 = new ImageIcon(getClass().getResource("/Cámara/Camara1 - 3.png"));
                     jCamara1.setIcon(iconoCamara1);
                     break;
-                
+
                 case 2:
                     contadorCamara1 = 3;
                     iconoCamara1 = new ImageIcon(getClass().getResource("/Cámara/Camara1 - 4.png"));
                     jCamara1.setIcon(iconoCamara1);
                     break;
-                
+
                 case 3:
                     contadorCamara1 = 0;
                     iconoCamara1 = new ImageIcon(getClass().getResource("/Cámara/Camara1 - 1.png"));
@@ -179,19 +212,19 @@ public final class FrmManual extends javax.swing.JFrame {
                     iconoCamara2 = new ImageIcon(getClass().getResource("/Cámara/Camara2 - 2.png"));
                     jCamara2.setIcon(iconoCamara2);
                     break;
-                
+
                 case 1:
                     contadorCamara2 = 2;
                     iconoCamara2 = new ImageIcon(getClass().getResource("/Cámara/Camara2 - 3.png"));
                     jCamara2.setIcon(iconoCamara2);
                     break;
-                
+
                 case 2:
                     contadorCamara2 = 3;
                     iconoCamara2 = new ImageIcon(getClass().getResource("/Cámara/Camara2 - 4.png"));
                     jCamara2.setIcon(iconoCamara2);
                     break;
-                
+
                 case 3:
                     contadorCamara2 = 0;
                     iconoCamara2 = new ImageIcon(getClass().getResource("/Cámara/Camara2 - 1.png"));
@@ -200,13 +233,13 @@ public final class FrmManual extends javax.swing.JFrame {
             }
         }
     };
-    
+
     public void semaforoVerde() {
         Icon icono;
         icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
         jlabelSemaforo.setIcon(icono);
     }
-    
+
     public void semaforoRojo() {
         Icon icono;
         icono = new ImageIcon(getClass().getResource("/Imagenes/Rojo.png"));
@@ -216,7 +249,7 @@ public final class FrmManual extends javax.swing.JFrame {
     Timer timer2;
     Timer CambioImagen;
     public Timer random;
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -355,6 +388,9 @@ public final class FrmManual extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -370,19 +406,16 @@ public final class FrmManual extends javax.swing.JFrame {
                                 .addComponent(txtope, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(VelProm, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jCamara1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jCamara2))
+                                    .addComponent(jLabel7)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(184, 184, 184)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(VelProm, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel5)))
@@ -402,7 +435,9 @@ public final class FrmManual extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addComponent(btnGestion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(46, 46, 46))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,14 +477,17 @@ public final class FrmManual extends javax.swing.JFrame {
                             .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))))
                 .addGap(26, 26, 26)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGestion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGestion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(455, Short.MAX_VALUE)
@@ -512,6 +550,7 @@ public final class FrmManual extends javax.swing.JFrame {
         semaforoRojo();
         btnRojo.setEnabled(false);
         btnVerde.setEnabled(false);
+
     }//GEN-LAST:event_btnRojoActionPerformed
 
     private void btnVerdeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerdeMouseClicked
@@ -521,7 +560,7 @@ public final class FrmManual extends javax.swing.JFrame {
 
     private void btnVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerdeActionPerformed
         // TODO add your handling code here:
-                FrmLogin log = new FrmLogin();
+        FrmLogin log = new FrmLogin();
         java.util.Date fecha = new Date();
         DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         clsSemaforo se = new clsSemaforo();
@@ -550,7 +589,7 @@ public final class FrmManual extends javax.swing.JFrame {
         FrmMenuUsuario gestion = new FrmMenuUsuario();
         gestion.setVisible(true);
     }//GEN-LAST:event_btnGestionActionPerformed
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -580,7 +619,7 @@ public final class FrmManual extends javax.swing.JFrame {
                 new FrmManual().setVisible(true);
             }
         });
-        
+
     }
 
 

@@ -23,7 +23,7 @@ import javax.swing.Timer;
 public class FrmAuto extends javax.swing.JFrame {
 
     public int time = 20000;
-    public int sec = 20;
+    public static int  sec = 20;
     public static int d;
     public int TiemTrans = 0;
     public static int TiemRes;
@@ -120,8 +120,6 @@ public class FrmAuto extends javax.swing.JFrame {
                     jlabelSemaforo.setIcon(icono);
                     color = "Rojo";
                 }
-                System.out.println(d);
-                System.out.println(a);
                 se.setSemaforos_txt_est(color);
                 se.setSemaforos_txt_origen("Automatico");
                 se.setSemaforos_date_feho(fecha1.format(fecha));
@@ -169,8 +167,6 @@ public class FrmAuto extends javax.swing.JFrame {
             } else {
                 VelPro = 0;
             }
-
-            System.out.println(mas);
         }
     };
     public ActionListener cont = new ActionListener() {
@@ -430,7 +426,7 @@ public Timer timer;
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         // TODO add your handling code here:
-        FrmHistorial historial = new FrmHistorial();
+        FrmHistorial1 historial = new FrmHistorial1();
         historial.setVisible(true);
     }//GEN-LAST:event_btnHistorialActionPerformed
 

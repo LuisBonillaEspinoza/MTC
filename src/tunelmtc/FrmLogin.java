@@ -14,8 +14,9 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 public class FrmLogin extends javax.swing.JFrame {
-
+FrmAuto au = new FrmAuto();
     public FrmLogin() {
+        au.timer.stop();
         initComponents();
         setLocationRelativeTo(null);
         MostrarOperario();
