@@ -88,8 +88,8 @@ public final class FrmManual extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             btnRojo.setEnabled(true);
-            if(btnRojo.setAction(isc))
-            btnVerde.setEnabled(true);
+//            if(btnRojo.setAction(isc))
+//            btnVerde.setEnabled(true);
         }
     };
 //     public ActionListener guard = new ActionListener() {
