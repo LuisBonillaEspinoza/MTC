@@ -17,6 +17,7 @@ public class FrmLogin extends javax.swing.JFrame {
 FrmAuto au = new FrmAuto();
     public FrmLogin() {
         au.timer.stop();
+        au.timer1.stop();
         initComponents();
         setLocationRelativeTo(null);
         MostrarOperario();

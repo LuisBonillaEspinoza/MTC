@@ -96,38 +96,38 @@ public final class FrmManual extends javax.swing.JFrame {
                 VelPro1 = suma / a;
 
                 VelProm.setText(String.valueOf(VelPro1));
-//                clsSensores ve = new clsSensores();
-//                ve.setSensores_num_ve11(String.valueOf(b[0]));
-//                ve.setSensores_num_vel2(String.valueOf(b[1]));
-//                ve.setSensores_num_vel3(String.valueOf(b[2]));
-//                ve.setSensores_num_vel4(String.valueOf(b[3]));
-//                ve.setSensores_num_vel5(String.valueOf(b[4]));
-//                ve.setSensores_num_vel6(String.valueOf(b[5]));
-//                Sensores ve1 = new Sensores();
-//                java.util.Date fecha = new Date();
-//                DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                ve1.IngresarVelocidades(ve);
-//                clsSemaforo se = new clsSemaforo();
-//                if (VelPro1 > 20) {
-//                    Icon icono;
-//                    icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
-//                    jlabelSemaforo.setIcon(icono);
-//                    color = "Verde";
-//                } else {
-//                    Icon icono;
-//                    icono = new ImageIcon(getClass().getResource("/Imagenes/rojo.png"));
-//                    jlabelSemaforo.setIcon(icono);
-//                    color = "Rojo";
-//                }
-//                se.setSemaforos_txt_est(color);
-//                se.setSemaforos_txt_origen("Manual");
-//                se.setSemaforos_date_feho(fecha1.format(fecha));
-//                se.setSemaforos_do_velpro(String.valueOf(VelPro1));
-//                Sensores sen = new Sensores();
-//                se.setSensores_num_cod(String.valueOf(sen.ObtenerUltimoId()));
-//                Semaforo sema = new Semaforo();
-//                sema.IngresarSemaforo2(se);} else {
-//                VelPro1 = 0;
+                clsSensores ve = new clsSensores();
+                ve.setSensores_num_ve11(String.valueOf(b[0]));
+                ve.setSensores_num_vel2(String.valueOf(b[1]));
+                ve.setSensores_num_vel3(String.valueOf(b[2]));
+                ve.setSensores_num_vel4(String.valueOf(b[3]));
+                ve.setSensores_num_vel5(String.valueOf(b[4]));
+                ve.setSensores_num_vel6(String.valueOf(b[5]));
+                Sensores ve1 = new Sensores();
+                java.util.Date fecha = new Date();
+                DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                ve1.IngresarVelocidades(ve);
+                clsSemaforo se = new clsSemaforo();
+                if (VelPro1 > 20) {
+                    Icon icono;
+                    icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
+                    jlabelSemaforo.setIcon(icono);
+                    color = "Verde";
+                } else {
+                    Icon icono;
+                    icono = new ImageIcon(getClass().getResource("/Imagenes/rojo.png"));
+                    jlabelSemaforo.setIcon(icono);
+                    color = "Rojo";
+                }
+                se.setSemaforos_txt_est(color);
+                se.setSemaforos_txt_origen("Manual");
+                se.setSemaforos_date_feho(fecha1.format(fecha));
+                se.setSemaforos_do_velpro(String.valueOf(VelPro1));
+                Sensores sen = new Sensores();
+                se.setSensores_num_cod(String.valueOf(sen.ObtenerUltimoId()));
+                Semaforo sema = new Semaforo();
+                sema.IngresarSemaforo2(se);} else {
+                VelPro1 = 0;
             }
         }
     };
