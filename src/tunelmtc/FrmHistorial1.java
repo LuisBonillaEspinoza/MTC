@@ -29,6 +29,7 @@ public class FrmHistorial1 extends javax.swing.JFrame {
     public FrmHistorial1() {
         initComponents();
         setLocationRelativeTo(null);
+        auto2.timer.stop();
         auto2.timer1.stop();
         tabla();
     }

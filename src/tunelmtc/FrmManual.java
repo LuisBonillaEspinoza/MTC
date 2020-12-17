@@ -24,12 +24,14 @@ public final class FrmManual extends javax.swing.JFrame {
     private int sec = auto1.TiemRes;
     private int VelPro1 = 0;
     private static int suma;
+    private String color1;
 
     public FrmManual() {
         initComponents();
         bloqueo();
-                auto1.timer.stop();
+//        ward = new Timer(20000, guard);
         auto1.timer1.stop();
+        auto1.timer.stop();
         if (auto1.VelPro > 20) {
             Icon icono;
             icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
@@ -46,42 +48,83 @@ public final class FrmManual extends javax.swing.JFrame {
 
         txtope.setText(lo.cod);
         VelProm.setText(String.valueOf(auto1.VelPro));
-        timer2 = new Timer(1000, accion1);
-        CambioImagen = new Timer(20000, cambio);
-        random = new Timer(20000, accion2);
-        color = new Timer(20000, rove);
 
-        random.setInitialDelay(sec1);
-        random.start();
+        CambioImagen = new Timer(20000, cambio);
+        random = new Timer(20000, velnew);
+        color = new Timer(20000, rove);
+                   
+        timer2 = new Timer(1000, accion1);
         timer2.setInitialDelay(0);
         CambioImagen.setInitialDelay(sec1);
 
         color.setInitialDelay(sec1);
         timer2.start();
         CambioImagen.start();
+        
 
         color.start();
 
-    }
 
+        random.setInitialDelay(sec1);
+
+
+
+//                              ward.setInitialDelay(sec1);
+                                      random.start();
+//                                                                   ward.setRepeats(false);
+//                             ward.start(); 
+
+
+ 
+    }
+   
     void bloqueo() {
         txtTiempoRest.setEditable(false);
         txtope.setEditable(false);
         VelProm.setEditable(false);
     }
+    
     public ActionListener rove = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             btnRojo.setEnabled(true);
+            if(btnRojo.setAction(isc))
             btnVerde.setEnabled(true);
         }
     };
-    public ActionListener accion2 = new ActionListener() {
+//     public ActionListener guard = new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            System.out.println("aa");
+//
+//
+////        FrmLogin log = new FrmLogin();
+////            java.util.Date fecha = new Date();
+////            DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+////            clsSemaforo se = new clsSemaforo();
+////            se.setSemaforos_txt_est(color1);
+////        se.setOperario_num_id(log.dni);
+////            se.setSemaforos_txt_origen("Manual");
+////            se.setSemaforos_date_feho(fecha1.format(fecha));
+////            se.setSemaforos_do_velpro(String.valueOf(VelPro1));
+////            Sensores sen = new Sensores();
+////            se.setSensores_num_cod(String.valueOf(sen.ObtenerUltimoId()));
+////            Semaforo sema = new Semaforo();
+////            sema.IngresarSemaforo1(se);
+//
+////if(!ward.isRepeats()){
+////                    sema.DeleteUltimo();
+////sema.AtualizarVel(color1,"Manual", fecha1.format(fecha),String.valueOf(VelPro1), String.valueOf(sen.ObtenerUltimoId()));
+////
+////}
+//        }
+//    };
+    public ActionListener velnew = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             int a;
             int c;
-            String color = "";
+            color1 = "";
             int b[] = new int[6];
             a = (int) (Math.random() * 6);
             for (int i = 0; i < a; i++) {
@@ -104,33 +147,28 @@ public final class FrmManual extends javax.swing.JFrame {
                 ve.setSensores_num_vel5(String.valueOf(b[4]));
                 ve.setSensores_num_vel6(String.valueOf(b[5]));
                 Sensores ve1 = new Sensores();
-                java.util.Date fecha = new Date();
-                DateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
                 ve1.IngresarVelocidades(ve);
-                clsSemaforo se = new clsSemaforo();
+                System.out.println("bb");
+
                 if (VelPro1 > 20) {
                     Icon icono;
                     icono = new ImageIcon(getClass().getResource("/Imagenes/verde.png"));
                     jlabelSemaforo.setIcon(icono);
-                    color = "Verde";
+                    color1 = "Verde";
                 } else {
                     Icon icono;
                     icono = new ImageIcon(getClass().getResource("/Imagenes/rojo.png"));
                     jlabelSemaforo.setIcon(icono);
-                    color = "Rojo";
+                    color1 = "Rojo";
                 }
-                se.setSemaforos_txt_est(color);
-                se.setSemaforos_txt_origen("Manual");
-                se.setSemaforos_date_feho(fecha1.format(fecha));
-                se.setSemaforos_do_velpro(String.valueOf(VelPro1));
-                Sensores sen = new Sensores();
-                se.setSensores_num_cod(String.valueOf(sen.ObtenerUltimoId()));
-                Semaforo sema = new Semaforo();
-                sema.IngresarSemaforo2(se);} else {
+
+            } else {
                 VelPro1 = 0;
             }
         }
     };
+
     public ActionListener accion1 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -249,7 +287,8 @@ public final class FrmManual extends javax.swing.JFrame {
     Timer timer2;
     Timer CambioImagen;
     public Timer random;
-
+    public Timer ward;
+Timer ta;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -550,6 +589,11 @@ public final class FrmManual extends javax.swing.JFrame {
         semaforoRojo();
         btnRojo.setEnabled(false);
         btnVerde.setEnabled(false);
+        int a = sec*1000;
+//        while(sec>=10){
+//            jLabel1.setText("");
+////            sec--;
+//        }
 
     }//GEN-LAST:event_btnRojoActionPerformed
 
@@ -576,6 +620,7 @@ public final class FrmManual extends javax.swing.JFrame {
         semaforoVerde();
         btnVerde.setEnabled(false);
         btnRojo.setEnabled(false);
+        jLabel1.setText("");
     }//GEN-LAST:event_btnVerdeActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed

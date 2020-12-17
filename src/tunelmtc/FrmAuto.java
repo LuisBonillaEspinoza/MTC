@@ -23,14 +23,15 @@ import javax.swing.Timer;
 public class FrmAuto extends javax.swing.JFrame {
 
     public int time = 20000;
-    public static int  sec = 20;
+    public static int sec = 20;
     public static int d;
     public int TiemTrans = 0;
     public static int TiemRes;
     public static int VelPro = 0;
-    private int mas=0;
+    private int mas = 0;
     private int h = 0;
-    private int time1=20000 + mas;
+    private int time1 = 20000 + mas;
+
     public FrmAuto() {
         initComponents();
         setLocationRelativeTo(null);
@@ -88,14 +89,15 @@ public class FrmAuto extends javax.swing.JFrame {
             }
             if (a > 0) {
                 for (int i = 0; i < a; i++) {
-                    txtSensor1.setText(String.valueOf(b[0]));
-                    txtSensor2.setText(String.valueOf(b[1]));
-                    txtSensor3.setText(String.valueOf(b[2]));
-                    txtSensor4.setText(String.valueOf(b[3]));
-                    txtSensor5.setText(String.valueOf(b[4]));
-                    txtSensor6.setText(String.valueOf(b[5]));
+
                     d = d + b[i];
                 }
+                txtSensor1.setText(String.valueOf(b[0]));
+                txtSensor2.setText(String.valueOf(b[1]));
+                txtSensor3.setText(String.valueOf(b[2]));
+                txtSensor4.setText(String.valueOf(b[3]));
+                txtSensor5.setText(String.valueOf(b[4]));
+                txtSensor6.setText(String.valueOf(b[5]));
                 txtPromedio.setText(String.valueOf(d / a));
                 clsSensores ve = new clsSensores();
                 ve.setSensores_num_ve11(txtSensor1.getText());

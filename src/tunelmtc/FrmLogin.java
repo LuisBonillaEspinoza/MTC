@@ -190,8 +190,10 @@ FrmAuto au = new FrmAuto();
                     dni = rs.getString("operario_txt_iden");
                     cod = rs.getString("operario_txt_nom");
                     FrmManual tunel = new FrmManual();
-                    String[] args = null;
-                    tunel.main(args);
+//                    String[] args = null;
+//                    tunel.main(args);
+FrmManual man = new FrmManual();
+man.setVisible(true);
                     this.dispose();
                 }
                 else{
